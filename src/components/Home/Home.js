@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TbAdjustmentsHorizontal } from 'react-icons/tb';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-
+import moment from 'moment';
 
 
 const Home = () => {
@@ -28,12 +28,16 @@ const Home = () => {
         setPersonInfo(person);
         setDisplayInfo(true);
         setInitialDisplayData(false);
-        window.scrollTo({top: 0, left: 0, behavior:"smooth"}) 
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
     }
 
     const HandleToggleIcon = () => {
         setToggle(!toggle);
     }
+
+
+
+
 
 
     return (
@@ -55,7 +59,7 @@ const Home = () => {
                                     <p className='text-xl mb-1'>Time <span className='ml-[51px]'>: {data.Time.split('T')[1].split('.')[0]}</span></p>
                                     <p className='text-xl mt-8'>Description: </p>
                                     <p className='text-xl'>{data.Name} detected at </p>
-                                    <p className='text-xl'>{data.Location} on {data.Date.split('T')[0].split("-").reverse().join("-").replace("01", "January")}</p>
+                                    <p className='text-xl'>{data.Location} on {moment(data.Date).subtract(1 , 'days').format('Do MMMM, YYYY')}</p>
                                 </div>
 
                                 <div className=''>
@@ -82,7 +86,7 @@ const Home = () => {
                         <p className='text-xl mb-1'>Time <span className='ml-[51px]'>: {personInfo.Time.split('T')[1].split('.')[0]}</span></p>
                         <p className='text-xl mt-8'>Description: </p>
                         <p className='text-xl'>{personInfo.Name} detected at </p>
-                        <p className='text-xl'>{personInfo.Location} on {personInfo.Date.split('T')[0].split("-").reverse().join("-").replace("01", "January")}</p>
+                        <p className='text-xl'>{personInfo.Location} on {moment(personInfo.Date).subtract(1 , 'days').format('Do MMMM, YYYY')}</p>
                     </div>
 
                     <div className=''>
@@ -94,7 +98,7 @@ const Home = () => {
 
 
 
-            <div className='lg:w-1/2 bg-gray-300 px-4 rounded-lg lg:mt-0 mt-12'>
+            <div className='lg:w-1/2 bg-gray-300 px-3 rounded-lg lg:mt-0 mt-12'>
                 <div className='bg-white p-4 my-4 rounded-md'>
                     <div className='flex items-center mb-3 lg:gap-x-[480px] md:gap-x-[470px] gap-x-36 '>
                         <h1 className='text-[25px] font-bold'>Events</h1>
